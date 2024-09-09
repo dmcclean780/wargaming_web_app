@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from './Button';
-export default function BasicTextFields({ title, setPassword, setEmail, handleAction }) {
+export default function BasicTextFields({ title, setPassword, setEmail, handleAction, otherAuthentication, goToOtherAuthenticationPage }) {
     return (
         <div>
             <div className="heading-container">
@@ -34,6 +34,11 @@ export default function BasicTextFields({ title, setPassword, setEmail, handleAc
             </Box>
 
             <Button title={title} handleAction={handleAction}/>
+
+            <div>or</div>
+
+            <Button title={otherAuthentication} handleAction={goToOtherAuthenticationPage}/>
+
         </div>
     );
 }
