@@ -1,13 +1,12 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "react-register-12564.firebaseapp.com",
-    projectId: "react-register-12564",
-    storageBucket: "react-register-12564.appspot.com",
-    messagingSenderId: "1074586181097",
-    appId: "1:1074586181097:web:47236fd450006cd1fabf78",
-    measurementId: "G-JSN76LC2EC"
-};
-
+    apiKey: "AIzaSyARdLTdzdrtd44toGAd2eW3fJjoBUHovzY",
+    authDomain: "wargaming-web-app.firebaseapp.com",
+    projectId: "wargaming-web-app",
+    storageBucket: "wargaming-web-app.appspot.com",
+    messagingSenderId: "611600759065",
+    appId: "1:611600759065:web:8f4dd960177d6d4cc2ed88",
+    measurementId: "G-YSW7WPWH96"
+  };
 export const app = initializeApp(firebaseConfig);
