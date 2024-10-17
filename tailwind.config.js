@@ -21,6 +21,10 @@ module.exports = {
     extend: {
       fontFamily: {
         anton: ["Anton", "sans-serif"]
+      },
+      colors: {
+        'carmine': '#931621',
+        'cam-blue': '#7F9C96'
       }
     },
   },

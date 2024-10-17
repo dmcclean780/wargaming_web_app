@@ -61,7 +61,7 @@ function App() {
     }
   }, [])
   return (
-    <div className="App">
+    <div className="App h-dvh bg-gray-700">
       <>
         <ToastContainer />
         <Routes>
@@ -69,11 +69,11 @@ function App() {
             path='/login'
             element={
               <Form
-                title="Login"
+                title="LOGIN"
                 setEmail={setEmail}
                 setPassword={setPassword}
                 handleAction={() => handleAction(1)}
-                otherAuthentication="Register"
+                otherAuthentication="REGISTER"
                 goToOtherAuthenticationPage={() => navigate('/register')}
               />}
           />
@@ -81,11 +81,11 @@ function App() {
             path='/register'
             element={
               <Form
-                title="Register"
+                title="REGISTER"
                 setEmail={setEmail}
                 setPassword={setPassword}
                 handleAction={() => handleAction(2)}
-                otherAuthentication="Login"
+                otherAuthentication="LOGIN"
                 goToOtherAuthenticationPage={() => navigate('/login')}
               />}
           />

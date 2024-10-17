@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import TitleBar from './TitleBar.js'
+import Footer from './Footer.js'
+import Button  from './common/Button.js';
 
 export default function Home() {
     
@@ -18,23 +20,41 @@ export default function Home() {
         }
     }, [])
     return (
-        <div>
+        <div className='h-dvh flex flex-col'>
             <TitleBar
                 title="HOME"
                 version="0.0.1"
             />
-            {/* <div className='flex-col items-center'>
-                <div className='flex-grow flex-row self-center items-center'>
-                    <div>
-                        HEllO
-                    </div>
-                    <div>
-                        WORLD
-                    </div>
 
+            <div className='flex flex-col flex-grow justify-around items-center bg-gray-700'>
+                <div className='w-full h-1/3 grid place-items-center'>
+                    <Button 
+                        title = "Reference" 
+                        handleAction={() => console.log("Reference")}
+                        className='w-2/3 h-2/3 px-2 py-1 rounded-lg bg-cam-blue text-2xl md:text-4xl lg:text-6xl font-anton text-white'
+                    />
                 </div>
-            </div> */}
-            
+                <div className='w-full h-1/3 grid place-items-center'>
+
+                    <Button 
+                        title = "Plan" 
+                        handleAction={() => console.log("Plan")}
+                        className='w-2/3 h-2/3 px-2 py-1 rounded-lg bg-cam-blue text-2xl md:text-4xl lg:text-6xl font-anton text-white'
+                    />
+                </div>
+                <div className='w-full h-1/3 grid place-items-center'>
+                    <Button 
+                        title = "Play" 
+                        handleAction={() => console.log("play")}
+                        className='w-2/3 h-2/3 px-2 py-1 rounded-lg bg-cam-blue text-2xl md:text-4xl lg:text-6xl font-anton text-white'
+                    />
+                </div>
+            </div>
+
+            <Footer
+                title="HOME"
+                version="0.0.1"
+            /> 
         </div>
         
     )
