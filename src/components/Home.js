@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import TitleBar from './TitleBar.js'
 
 export default function Home() {
-    const handleLogout = () => {
-        sessionStorage.removeItem('Auth Token');
-        navigate('/login')
-    }
+    
 
     let navigate = useNavigate();
 
     useEffect(() => {
         let authToken = sessionStorage.getItem('Auth Token')
-        console.log(authToken)
         if (authToken) {
             navigate('/home')
         }
@@ -22,9 +19,23 @@ export default function Home() {
     }, [])
     return (
         <div>
-            Home Page
+            <TitleBar
+                title="HOME"
+                version="0.0.1"
+            />
+            {/* <div className='flex-col items-center'>
+                <div className='flex-grow flex-row self-center items-center'>
+                    <div>
+                        HEllO
+                    </div>
+                    <div>
+                        WORLD
+                    </div>
 
-            <button onClick={handleLogout}>Log out</button>
+                </div>
+            </div> */}
+            
         </div>
+        
     )
 }
