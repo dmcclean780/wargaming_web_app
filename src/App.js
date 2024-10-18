@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/common/Form';
 import Home from './components/Home';
+import Reference from './components/Reference.js';
 import {
   Routes,
   Route,
-  useNavigate
+  useNavigate,
+  useLocation
 } from "react-router-dom";
 import {app} from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -49,12 +51,18 @@ function App() {
         })
     }
   }
-
+  let location = useLocation();
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
-
+    
     if (authToken) {
-      navigate('/home')
+      if(location.pathname != ""){
+        navigate(location.pathname)
+      }
+      else{
+        navigate('/home')
+      }
+      
     }
     else {
       navigate('/login')
@@ -75,7 +83,8 @@ function App() {
                 handleAction={() => handleAction(1)}
                 otherAuthentication="REGISTER"
                 goToOtherAuthenticationPage={() => navigate('/register')}
-              />}
+              />
+            }
           />
           <Route
             path='/register'
@@ -87,13 +96,33 @@ function App() {
                 handleAction={() => handleAction(2)}
                 otherAuthentication="LOGIN"
                 goToOtherAuthenticationPage={() => navigate('/login')}
-              />}
+              />
+            }
           />
 
           <Route
             path='/home'
             element={
-              <Home />}
+              <Home />
+            }
+          />
+          <Route
+            path='/reference'
+            element={
+              <Reference />
+            }
+          />
+          <Route
+          path='/plan'
+          element={
+            <div> hello</div>
+          }
+          />
+          <Route
+            path='/play'
+            element={
+              <div> hello</div>
+            }
           />
         </Routes>
       </>
