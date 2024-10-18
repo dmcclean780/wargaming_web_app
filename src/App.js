@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/common/Form';
 import Home from './components/Home';
+import Reference from './components/Reference.js';
 import {
   Routes,
   Route,
-  useNavigate
+  useNavigate,
+  useLocation
 } from "react-router-dom";
-import { app } from './firebase-config';
+import {app} from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,19 +51,25 @@ function App() {
         })
     }
   }
-
+  let location = useLocation();
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
-
+    
     if (authToken) {
-      navigate('/home')
+      if(location.pathname != ""){
+        navigate(location.pathname)
+      }
+      else{
+        navigate('/home')
+      }
+      
     }
     else {
       navigate('/login')
     }
   }, [])
   return (
-    <div className="App">
+    <div className="App h-dvh bg-gray-700">
       <>
         <ToastContainer />
         <Routes>
@@ -69,31 +77,52 @@ function App() {
             path='/login'
             element={
               <Form
-                title="Login"
+                title="LOGIN"
                 setEmail={setEmail}
                 setPassword={setPassword}
                 handleAction={() => handleAction(1)}
-                otherAuthentication="Register"
+                otherAuthentication="REGISTER"
                 goToOtherAuthenticationPage={() => navigate('/register')}
-              />}
+              />
+            }
           />
           <Route
             path='/register'
             element={
               <Form
-                title="Register"
+                title="REGISTER"
                 setEmail={setEmail}
                 setPassword={setPassword}
                 handleAction={() => handleAction(2)}
-                otherAuthentication="Login"
+                otherAuthentication="LOGIN"
                 goToOtherAuthenticationPage={() => navigate('/login')}
-              />}
+              />
+            }
           />
 
           <Route
             path='/home'
             element={
-              <Home />}
+              <Home />
+            }
+          />
+          <Route
+            path='/reference'
+            element={
+              <Reference />
+            }
+          />
+          <Route
+          path='/plan'
+          element={
+            <div> hello</div>
+          }
+          />
+          <Route
+            path='/play'
+            element={
+              <div> hello</div>
+            }
           />
         </Routes>
       </>

@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 import Button from './Button';
 export default function BasicTextFields({ title, setPassword, setEmail, handleAction, otherAuthentication, goToOtherAuthenticationPage }) {
     return (
-        <div>
-            <div className="heading-container">
+        <div className='grid place-items-center text-white'>
+            <div className="heading-container font-anton text-white text-2xl">
                 <h3>
-                    {title} Form
+                    {title}
                 </h3>
             </div>
 
@@ -37,7 +37,7 @@ export default function BasicTextFields({ title, setPassword, setEmail, handleAc
 
             <Button title={title} handleAction={handleAction}/>
 
-            <div>or</div>
+            <div className='font-anton'>OR </div>
 
             <Button title={otherAuthentication} handleAction={goToOtherAuthenticationPage}/>
 
