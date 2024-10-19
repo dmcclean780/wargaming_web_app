@@ -4,13 +4,31 @@ import TitleBar from './TitleBar.js'
 import Footer from './Footer.js'
 import Button  from './common/Button.js';
 import MenuButton from './common/MenuButton.js';
+import {db, app} from '../firebase-config.js'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import {collection, query, getFirestore} from 'firebase/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 export default function Reference() {
-    
 
     let navigate = useNavigate();
+    
+    const [data, isLoading, isError] = useCollection( //Working Properly
+            collection(
+                db,
+                'codexes'
+            ),
+    )
 
-    let armies = ["space-marines", "dark-angles", "space-wolves", "blood-angles"]
+    if(isLoading){
+        return (
+            <div>loading</div>
+        )
+    }
+     
+    const armies = data.docs.map(doc => doc.data().name);
+
     return (
         <div className='h-screen flex flex-col'>
             <TitleBar
@@ -22,7 +40,7 @@ export default function Reference() {
                 {armies.map(army => (
                     <MenuButton 
                     key = {army}
-                    title = {army.replace("-", " ").toUpperCase()}
+                    title = {army.toUpperCase()}
                     handleAction = {() => console.log(army)}
                 />
                 ))}
