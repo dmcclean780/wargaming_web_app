@@ -9,7 +9,7 @@ export default function Footer(){
             <Button 
                     
                     title= "HOME"
-                    handleAction={()=>navigate('/home')}
+                    handleAction={()=>navigate('/')}
                     className='bg-transparent px-2 py-1 rounded-lg font-anton text-white text-2xl' 
             /> 
         </div>

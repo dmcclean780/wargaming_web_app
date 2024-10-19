@@ -12,7 +12,7 @@ export default function Home() {
     useEffect(() => {
         let authToken = sessionStorage.getItem('Auth Token')
         if (authToken) {
-            navigate('/home')
+            navigate('/')
         }
 
         if (!authToken) {

@@ -25,7 +25,7 @@ function App() {
     if (id === 1) {
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-          navigate('/home')
+          navigate('/')
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
         })
         .catch((error) => {
@@ -60,7 +60,7 @@ function App() {
         navigate(location.pathname)
       }
       else{
-        navigate('/home')
+        navigate('/')
       }
       
     }
@@ -101,7 +101,7 @@ function App() {
           />
 
           <Route
-            path='/home'
+            path='/'
             element={
               <Home />
             }
@@ -110,6 +110,12 @@ function App() {
             path='/reference'
             element={
               <Reference />
+            }
+          />
+          <Route
+            path = '/reference/:codex'
+            element = {
+              <div> Hello My Page</div>
             }
           />
           <Route
