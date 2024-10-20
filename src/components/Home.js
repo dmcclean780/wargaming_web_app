@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import TitleBar from './TitleBar.js'
-import Footer from './Footer.js'
+import TitleBar from './common/TitleBar.js'
+import Footer from './common/Footer.js'
 import Button  from './common/Button.js';
 
 export default function Home() {

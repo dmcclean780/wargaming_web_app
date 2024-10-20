@@ -13,6 +13,8 @@ import {app} from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CodexPage from './components/CodexPage.js';
+import ArmyRulesPage from './components/ArmyRulesPage.js';
 
 function App() {
 
@@ -36,6 +38,7 @@ function App() {
           if (error.code === 'auth/user-not-found') {
             toast.error('Please check the Email');
           }
+          else{ toast.error(error.code)}
         })
     }
     if (id === 2) {
@@ -48,6 +51,7 @@ function App() {
           if (error.code === 'auth/email-already-in-use') {
             toast.error('Email Already in Use');
           }
+          else{ toast.error(error.code)}
         })
     }
   }
@@ -113,9 +117,27 @@ function App() {
             }
           />
           <Route
-            path = '/reference/:codex'
+            path = '/reference/:codex/'
             element = {
-              <div> Hello My Page</div>
+              <CodexPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/army-rules'
+            element = {
+              <ArmyRulesPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments'
+            element = {
+              <div>Hello World a</div>
+            }
+          />
+          <Route
+            path = '/reference/:codex/datasheets'
+            element = {
+              <div>Hello World b</div>
             }
           />
           <Route

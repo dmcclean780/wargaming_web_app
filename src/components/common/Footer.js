@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import  Button  from './common/Button.js';
+import  Button  from './Button.js';
 import React, { useEffect } from 'react'
 
 export default function Footer(){

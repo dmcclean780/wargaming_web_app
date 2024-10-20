@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from './common/Button';
+import Button from './Button';
 
 export default function TitleBar({title, version}){
     let navigate = useNavigate();
