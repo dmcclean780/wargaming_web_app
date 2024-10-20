@@ -6,18 +6,22 @@ import {db} from '../firebase-config.js'
 import {collection} from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {
-    useNavigate,
+    useNavigate, useLocation
   } from "react-router-dom"
 import { version } from '../version.js';
 
-export default function Reference() {
+export default function DetachmentsPage() {
 
     let navigate = useNavigate();
+    const location = useLocation();
+    const currentCodex = location.pathname.split("/")[2]
     
     const [data, isLoading, isError] = useCollection( //Working Properly
             collection(
                 db,
-                'codexes'
+                'codexes',
+                currentCodex.replace("%20", "-"),
+                'detachments'
             ),
     )
 
@@ -26,15 +30,12 @@ export default function Reference() {
             <div>loading</div>
         )
     }
-     
-    const armies = data.docs.map(doc => doc.data().name);
-    const armiesID = data.docs.map(doc => doc.id);
 
     return (
-        <div>
+
             <div className='h-screen flex flex-col'>
                 <TitleBar
-                    title="REFERNCE"
+                    title="DETACHMENTS"
                     version={version}
                 />
 
@@ -42,8 +43,8 @@ export default function Reference() {
                     {data.docs.map(doc => (
                         <MenuButton 
                         key = {doc.data().name}
-                        title = {doc.data().name.toUpperCase().replace("-", " ")}
-                        handleAction = {() => navigate('/reference/'+doc.id)}
+                        title = {doc.data().name}
+                        handleAction = {() => navigate(location.pathname + '/' + doc.id)}
                     />
                     ))}
                 </div>
@@ -51,6 +52,5 @@ export default function Reference() {
                 <Footer
                 /> 
             </div>
-        </div>
     )
 }

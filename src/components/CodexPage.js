@@ -1,22 +1,41 @@
 import { Routes, useLocation, useNavigate, Route } from "react-router-dom"
-import {collection, query, where, getDocs} from "firebase/firestore"
+import {collection, query, where, getDocs, doc, FieldPath} from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore"
 import { db } from "../firebase-config"
 import MenuButton from "./common/MenuButton"
 import TitleBar from "./common/TitleBar"
 import Footer from "./common/Footer"
+import { version } from "../version"
 
 export default function CodexPage(){
     const navigate = useNavigate();
     const location = useLocation()
-    const currentCodex = location.pathname.split("/")[2]
+    const currentCodexID = location.pathname.split("/")[2]
+    const [currentCodex, isLoading, isError] = useCollection(
+        query(
+            collection(
+                db,
+                "codexes",
+            ),
+            where(
+                'uid', '==', currentCodexID
+            )
+
+        )
+    )
+
+    if(isLoading){
+        return (
+            <div>loading</div>
+        )
+    }
 
     return(
         <div className='h-dvh flex flex-col'>
 
             <TitleBar 
-                title = {currentCodex.replace("-", " ").toUpperCase()}
-                version="0.0.1"
+                title = {currentCodex.docs[0].data().name.toUpperCase()}
+                version={version}
             />
             <div className='flex flex-col flex-grow justify-around items-center bg-gray-700'>
             <MenuButton

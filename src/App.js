@@ -15,11 +15,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CodexPage from './components/CodexPage.js';
 import ArmyRulesPage from './components/ArmyRulesPage.js';
+import DetachmentsPage from './components/DetachmentsPage.js';
+import Detachment from './components/Detachment.js';
+import Enhancements from './components/Enhancments.js';
+import Stratagems from './components/Stratagems.js';
 
 function App() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const version="0.0.1"
   let navigate = useNavigate();
 
   const handleAction = (id) => {
@@ -131,7 +136,25 @@ function App() {
           <Route
             path = '/reference/:codex/detachments'
             element = {
-              <div>Hello World a</div>
+              <DetachmentsPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment'
+            element = {
+              <Detachment/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment/enhancments'
+            element = {
+              <Enhancements/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment/stratagems'
+            element = {
+              <Stratagems/>
             }
           />
           <Route

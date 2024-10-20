@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import TitleBar from './common/TitleBar.js'
 import Footer from './common/Footer.js'
 import Button  from './common/Button.js';
+import { version } from '../version.js';
 
 export default function Home() {
     
@@ -23,7 +24,7 @@ export default function Home() {
         <div className='h-dvh flex flex-col'>
             <TitleBar
                 title="HOME"
-                version="0.0.1"
+                version={version}
             />
 
             <div className='flex flex-col flex-grow justify-around items-center bg-gray-700'>
