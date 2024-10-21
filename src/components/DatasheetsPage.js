@@ -28,7 +28,6 @@ export default function DatasheetsPage(){
         )
     }
 
-    console.log(data.docs[0].id, data.docs[1].id)
     return(
         <div>
             <div className='h-screen flex flex-col'>
