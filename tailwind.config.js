@@ -20,7 +20,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        anton: ["Anton", "sans-serif"]
+        anton: ["Anton", "sans-serif"],
+        "libre-baskerville": ["Libre Baskerville", "sans-serif"]
       },
       colors: {
         'carmine': '#931621',

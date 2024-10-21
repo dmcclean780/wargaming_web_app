@@ -13,11 +13,20 @@ import {app} from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CodexPage from './components/CodexPage.js';
+import ArmyRulesPage from './components/ArmyRulesPage.js';
+import DetachmentsPage from './components/DetachmentsPage.js';
+import Detachment from './components/Detachment.js';
+import Enhancements from './components/Enhancments.js';
+import Stratagems from './components/Stratagems.js';
+import DatasheetsPage from './components/DatasheetsPage.js';
+import Datasheet from './components/Datasheet.js';
 
 function App() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const version="0.0.1"
   let navigate = useNavigate();
 
   const handleAction = (id) => {
@@ -25,7 +34,7 @@ function App() {
     if (id === 1) {
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-          navigate('/home')
+          navigate('/')
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
         })
         .catch((error) => {
@@ -36,6 +45,7 @@ function App() {
           if (error.code === 'auth/user-not-found') {
             toast.error('Please check the Email');
           }
+          else{ toast.error(error.code)}
         })
     }
     if (id === 2) {
@@ -48,6 +58,7 @@ function App() {
           if (error.code === 'auth/email-already-in-use') {
             toast.error('Email Already in Use');
           }
+          else{ toast.error(error.code)}
         })
     }
   }
@@ -60,7 +71,7 @@ function App() {
         navigate(location.pathname)
       }
       else{
-        navigate('/home')
+        navigate('/')
       }
       
     }
@@ -101,7 +112,7 @@ function App() {
           />
 
           <Route
-            path='/home'
+            path='/'
             element={
               <Home />
             }
@@ -110,6 +121,54 @@ function App() {
             path='/reference'
             element={
               <Reference />
+            }
+          />
+          <Route
+            path = '/reference/:codex/'
+            element = {
+              <CodexPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/army-rules'
+            element = {
+              <ArmyRulesPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments'
+            element = {
+              <DetachmentsPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment'
+            element = {
+              <Detachment/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment/enhancments'
+            element = {
+              <Enhancements/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/detachments/:detachment/stratagems'
+            element = {
+              <Stratagems/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/datasheets'
+            element = {
+              <DatasheetsPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/datasheets/:datasheet'
+            element = {
+              <Datasheet/>
             }
           />
           <Route
