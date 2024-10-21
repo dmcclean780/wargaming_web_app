@@ -19,6 +19,8 @@ import DetachmentsPage from './components/DetachmentsPage.js';
 import Detachment from './components/Detachment.js';
 import Enhancements from './components/Enhancments.js';
 import Stratagems from './components/Stratagems.js';
+import DatasheetsPage from './components/DatasheetsPage.js';
+import Datasheet from './components/Datasheet.js';
 
 function App() {
 
@@ -160,7 +162,13 @@ function App() {
           <Route
             path = '/reference/:codex/datasheets'
             element = {
-              <div>Hello World b</div>
+              <DatasheetsPage/>
+            }
+          />
+          <Route
+            path = '/reference/:codex/datasheets/:datasheet'
+            element = {
+              <Datasheet/>
             }
           />
           <Route
