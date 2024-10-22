@@ -92,8 +92,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Ranged Weapons</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Ranged Weapons</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -118,8 +118,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Melee Weapons</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Melee Weapons</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -144,8 +144,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Abilities</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Abilities</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white font-sans"
@@ -188,8 +188,8 @@ export default function Datasheet() {
                             <Collapsible
                                 trigger={<div className="flex flex-row justify-between"> <div>Wargear Abilities</div> <div>▼</div> </div>}
                                 triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Wargear Abilities</div> <div>▲</div> </div>}
-                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                                 triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                                 className="bg-cam-blue flex flex-col  w-full"
                                 openedClassName="bg-cam-blue flex flex-col  w-full"
                                 contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -216,8 +216,8 @@ export default function Datasheet() {
                             <Collapsible
                                 trigger={<div className="flex flex-row justify-between"> <div>Leader</div> <div>▼</div> </div>}
                                 triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Leader</div> <div>▲</div> </div>}
-                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                                 className="bg-cam-blue flex flex-col  w-full"
                                 openedClassName="bg-cam-blue flex flex-col  w-full"
                                 contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -246,8 +246,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Wargear Options</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Wargear Options</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -276,8 +276,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Unit Composition</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Unit Composition</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                           triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -318,8 +318,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Keywords</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Keywords</div> <div>▲</div> </div>}
-                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
-                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
