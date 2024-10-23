@@ -6,13 +6,15 @@ import { db } from '../firebase-config.js'
 import { collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {
+    useLocation,
     useNavigate,
 } from "react-router-dom"
 import { version } from '../version.js';
+import Button from './common/Button.js'
 
-export default function Reference() {
-
-    let navigate = useNavigate();
+export default function ChooseFaction() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [data, isLoading, isError] = useCollection( //Working Properly
         collection(
             db,
@@ -26,9 +28,6 @@ export default function Reference() {
         )
     }
 
-    const armies = data.docs.map(doc => doc.data().name);
-    const armiesID = data.docs.map(doc => doc.id);
-
     return (
         <div>
             <div className='h-screen flex flex-col'>
@@ -39,11 +38,18 @@ export default function Reference() {
 
                 <div className='w-full bg-gray-700 h-full overflow-y-auto'>
                     {data.docs.map(doc => (
-                        <MenuButton
-                            key={doc.data().name}
-                            title={doc.data().name.toUpperCase().replace("-", " ")}
-                            handleAction={() => navigate('/reference/' + doc.id)}
-                        />
+                        <div className='w-full h-1/6 grid place-items-center'>
+                            <div className='w-2/3 h-2/3 px-2 py-1 rounded-lg bg-cam-blue flex flex-col justify-center items-center'>
+                                <Button
+                                    title={doc.data().name.toUpperCase()}
+                                    handleAction={() =>{
+                                        localStorage.setItem("chosenFactionID", doc.id)
+                                        localStorage.setItem("chosenFactionName", doc.data().name)
+                                        navigate(location.pathname+'/choose-detachment')}}
+                                    className='h-full w-full text-2xl md:text-4xl lg:text-6xl font-anton text-white'
+                                />
+                            </div>
+                        </div>
                     ))}
                 </div>
 
