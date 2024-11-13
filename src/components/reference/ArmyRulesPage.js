@@ -1,11 +1,11 @@
 import { useLocation} from "react-router-dom"
 import {collection} from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore"
-import { db } from "../firebase-config"
+import { db } from "../../firebase-config"
 import Collapsible from "react-collapsible";
-import TitleBar from "./common/TitleBar";
-import Footer from "./common/Footer";
-import  {version} from "../version"
+import TitleBar from "../common/TitleBar";
+import Footer from "../common/Footer";
+import  {version} from "../../version"
 
 export default function ArmyRulesPage(){
 

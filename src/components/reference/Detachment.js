@@ -1,12 +1,12 @@
 import { query, collection, where } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../firebase-config";
+import { db } from "../../firebase-config";
 import { useLocation, useNavigate } from "react-router-dom";
-import TitleBar from "./common/TitleBar";
+import TitleBar from "../common/TitleBar";
 import Collapsible from "react-collapsible";
-import Footer from "./common/Footer";
-import MenuButton from "./common/MenuButton";
-import { version } from "../version";
+import Footer from "../common/Footer";
+import MenuButton from "../common/MenuButton";
+import { version } from "../../version";
 
 export default function Detachment(){
     const location = useLocation()

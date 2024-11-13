@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
 import {collection, query, where} from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../firebase-config";
-import TitleBar from "./common/TitleBar";
+import { db } from "../../firebase-config";
+import TitleBar from "../common/TitleBar";
 import Collapsible from "react-collapsible";
-import Footer from "./common/Footer";
-import { version } from "../version";
+import Footer from "../common/Footer";
+import { version } from "../../version";
 
-export default function Stratagems(){
+export default function Enhancements(){
     const location = useLocation();
     const currentCodexID = location.pathname.split("/")[2]
     const currentDetachmentID = location.pathname.split('/')[4]
@@ -30,21 +30,22 @@ export default function Stratagems(){
             <div>loading</div>
         )
     }
-    const stratagems = data.docs[0].data().Stratagems
-    
+    const enhancements = data.docs[0].data().Enhancements
+   
+
     return (
         <div className='h-screen flex flex-col'>
             <TitleBar
-                title="STRATAGEMS"
+                title="ENHANCEMENTS"
                 version={version}
             />
             <div className='w-full bg-gray-700 h-full overflow-y-auto'>
-                {stratagems.map(stratagem =>(
-                    <div key={stratagem.name} className=' grid place-items-center'>
+                {enhancements.map(enhancement =>(
+                    <div key={enhancement.name} className=' grid place-items-center'>
                         <div className='w-2/3 mt-4 mb-4 rounded-lg bg-transparent flex flex-col justify-center items-center p-0'>
                             <Collapsible 
-                                trigger={<div className="flex flex-row justify-between"> <div>{"▼ "+stratagem.name}</div> <div>{stratagem.cost} CP</div> </div>}
-                                triggerWhenOpen={<div className="flex flex-row justify-between"> <div>{"▲ "+stratagem.name}</div> <div>{stratagem.cost} CP</div> </div>}
+                                trigger={<div className="flex flex-row justify-between"> <div>{"▼ "+enhancement.name}</div> <div>{enhancement.cost} Points</div> </div>}
+                                triggerWhenOpen={<div className="flex flex-row justify-between"> <div>{"▲ "+enhancement.name}</div> <div>{enhancement.cost} Points</div> </div>}
                                 triggerClassName="text-left text-white p-2 float-left bg-carmine rounded-lg font-anton text-sm"
                                 triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine rounded-t-lg font-anton text-sm"
                                 className="bg-cam-blue flex flex-col h-full w-full rounded-lg" 
@@ -53,11 +54,8 @@ export default function Stratagems(){
                                 transitionTime="100"
                                 transitionCloseTime="100"
                             >
-                                <ul >
-                                    <li className="list-disc my-1"><b>WHEN:</b> {stratagem.when}</li>
-                                    <li className="list-disc my-1"><b>TARGET:</b> {stratagem.target}</li>
-                                    <li className="list-disc my-1"><b>EFFECT:</b> {stratagem.effect}</li>
-                                    <li className="list-disc my-1"><b>RESTRICTIONS:</b> {stratagem.restrictions}</li>
+                                <ul>
+                                    {enhancement.rules}
                                 </ul>
                             </Collapsible>
                         </div>

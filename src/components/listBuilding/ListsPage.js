@@ -1,34 +1,23 @@
 import React from 'react'
-import TitleBar from './common/TitleBar.js'
-import Footer from './common/Footer.js'
-import MenuButton from './common/MenuButton.js';
-import { db } from '../firebase-config.js'
+import TitleBar from '../common/TitleBar.js'
+import Footer from '../common/Footer.js'
+import MenuButton from '../common/MenuButton.js';
+import { db } from '../../firebase-config.js'
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {
     useNavigate, useLocation
 } from "react-router-dom"
-import { version } from '../version.js';
+import { version } from '../../version.js';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import BasicButtons from './common/Button.js';
+import BasicButtons from '../common/Button.js';
 
 
 export default function ListsPage() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const auth = getAuth();
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/auth.user
-            let uid = user.uid;
-            localStorage.setItem("uid", uid);
-
-        } else {
-        }
-    });
+   
 
     const userDoc = doc(db, 'users', localStorage.getItem("uid"));
     setDoc(userDoc, { uid: localStorage.getItem("uid") }, { merge: true });

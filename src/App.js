@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/common/Form';
 import Home from './components/Home';
-import Reference from './components/Reference.js';
+import Reference from './components/reference/Reference.js';
 import {
   Routes,
   Route,
@@ -13,19 +13,26 @@ import { app } from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CodexPage from './components/CodexPage.js';
-import ArmyRulesPage from './components/ArmyRulesPage.js';
-import DetachmentsPage from './components/DetachmentsPage.js';
-import Detachment from './components/Detachment.js';
-import Enhancements from './components/Enhancments.js';
-import Stratagems from './components/Stratagems.js';
-import DatasheetsPage from './components/DatasheetsPage.js';
-import Datasheet from './components/Datasheet.js';
-import ListsPage from './components/ListsPage.js';
-import ChooseFaction from './components/ChooseFaction.js';
-import ChooseDetachment from './components/ChooseDetachment.js';
-import ChooseSize from './components/ChooseSize.js';
-import ChooseName from './components/ChooseName.js';
+import CodexPage from './components/reference/CodexPage.js';
+import ArmyRulesPage from './components/reference/ArmyRulesPage.js';
+import DetachmentsPage from './components/reference/DetachmentsPage.js';
+import Detachment from './components/reference/Detachment.js';
+import Enhancements from './components/reference/Enhancments.js';
+import Stratagems from './components/reference/Stratagems.js';
+import DatasheetsPage from './components/reference/DatasheetsPage.js';
+import Datasheet from './components/reference/Datasheet.js';
+import ListsPage from './components/listBuilding/ListsPage.js';
+import ChooseFaction from './components/listBuilding/ChooseFaction.js';
+import ChooseDetachment from './components/listBuilding/ChooseDetachment.js';
+import ChooseSize from './components/listBuilding/ChooseSize.js';
+import ChooseName from './components/listBuilding/ChooseName.js';
+import ShowList from './components/listBuilding/ShowList.js';
+import AddCharacter from './components/listBuilding/AddCharcater.js';
+import ConfigureCharacter from './components/listBuilding/ConfigureCharacter.js';
+import AddBattleline from './components/listBuilding/AddBattleline.js';
+import ConfigureUnit from './components/listBuilding/ConfigureUnit.js';
+import AddTransport from './components/listBuilding/AddTransport.js';
+import AddOther from './components/listBuilding/AddOther.js';
 
 
 function App() {
@@ -96,11 +103,11 @@ function App() {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
       uid = user.uid;
+      localStorage.setItem("uid", uid);
     } else {
       uid = undefined
     }
   });
-
 
   return (
     <div className="App h-dvh bg-gray-700">
@@ -205,7 +212,55 @@ function App() {
           <Route
             path='/plan/:list'
             element={
-              <div>hello</div>
+              <ShowList/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-character'
+            element={
+              <AddCharacter/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-character/configure-character'
+            element={
+              <ConfigureCharacter/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-battleline'
+            element={
+              <AddBattleline/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-battleline/configure-unit'
+            element={
+              <ConfigureUnit/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-transport'
+            element={
+              <AddTransport/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-transport/configure-unit'
+            element={
+              <ConfigureUnit/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-other'
+            element={
+              <AddOther/>
+            }
+          />
+          <Route
+            path='/plan/:list/add-other/configure-unit'
+            element={
+              <ConfigureUnit/>
             }
           />
           <Route

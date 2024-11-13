@@ -1,16 +1,16 @@
-import TitleBar from "./common/TitleBar";
+import TitleBar from "../common/TitleBar";
 import { useLocation } from "react-router-dom"
 import { collection, where, query } from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore"
-import { db } from "../firebase-config"
+import { db } from "../../firebase-config"
 import Collapsible from "react-collapsible";
-import Footer from "./common/Footer";
-import { version } from "../version"
-import Weapon from "./common/RangedWeapon";
-import RangedWeaponTitle from "./common/RangedWeponTitle";
-import RangedWeapon from "./common/RangedWeapon";
-import MeleeWeaponTitle from "./common/MeleeWeaponTitle";
-import MeleeWeapon from "./common/MeleeWeapon";
+import Footer from "../common/Footer";
+import { version } from "../../version"
+import Weapon from "../common/RangedWeapon";
+import RangedWeaponTitle from "../common/RangedWeponTitle";
+import RangedWeapon from "../common/RangedWeapon";
+import MeleeWeaponTitle from "../common/MeleeWeaponTitle";
+import MeleeWeapon from "../common/MeleeWeapon";
 
 export default function Datasheet() {
 
@@ -92,8 +92,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Ranged Weapons</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Ranged Weapons</div> <div>▲</div> </div>}
-                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -119,7 +119,7 @@ export default function Datasheet() {
                             trigger={<div className="flex flex-row justify-between"> <div>Melee Weapons</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Melee Weapons</div> <div>▲</div> </div>}
                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -145,7 +145,7 @@ export default function Datasheet() {
                             trigger={<div className="flex flex-row justify-between"> <div>Abilities</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Abilities</div> <div>▲</div> </div>}
                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white font-sans"
@@ -184,11 +184,12 @@ export default function Datasheet() {
 
                             </div>
                         </Collapsible>
+
                         {datasheet['wargear-abilities'].length != 0 &&
                             <Collapsible
                                 trigger={<div className="flex flex-row justify-between"> <div>Wargear Abilities</div> <div>▼</div> </div>}
                                 triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Wargear Abilities</div> <div>▲</div> </div>}
-                                 triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                                 triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                                 className="bg-cam-blue flex flex-col  w-full"
                                 openedClassName="bg-cam-blue flex flex-col  w-full"
@@ -207,6 +208,44 @@ export default function Datasheet() {
 
                                     ))}
 
+                                </div>
+
+                            </Collapsible>
+                        }
+
+                        {datasheet['transport'] != "" &&
+                            <Collapsible
+                                trigger={<div className="flex flex-row justify-between"> <div>Transport</div> <div>▼</div> </div>}
+                                triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Transport</div> <div>▲</div> </div>}
+                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                className="bg-cam-blue flex flex-col  w-full"
+                                openedClassName="bg-cam-blue flex flex-col  w-full"
+                                contentInnerClassName="text-left p-4 text-xs font-serif text-white"
+                                transitionTime="100"
+                                transitionCloseTime="100"
+                            >
+                                <div className="flex flex-col font-sans">
+                                    <div className="ml-2">{datasheet.transport}</div>
+                                </div>
+
+                            </Collapsible>
+                        }
+
+                        {datasheet['damaged']['trigger'] != -1 &&
+                            <Collapsible
+                                trigger={<div className="flex flex-row justify-between"> <div>{"Damaged: 1-"+ datasheet['damaged']['trigger']+" Wounds Remaining"}</div> <div>▼</div> </div>}
+                                triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Transport</div> <div>▲</div> </div>}
+                                triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                                className="bg-cam-blue flex flex-col  w-full"
+                                openedClassName="bg-cam-blue flex flex-col  w-full"
+                                contentInnerClassName="text-left p-4 text-xs font-serif text-white"
+                                transitionTime="100"
+                                transitionCloseTime="100"
+                            >
+                                <div className="flex flex-col font-sans">
+                                    <div className="ml-2">{datasheet['damaged']['rule']}</div>
                                 </div>
 
                             </Collapsible>
@@ -247,7 +286,7 @@ export default function Datasheet() {
                             trigger={<div className="flex flex-row justify-between"> <div>Wargear Options</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Wargear Options</div> <div>▲</div> </div>}
                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -276,8 +315,8 @@ export default function Datasheet() {
                         <Collapsible
                             trigger={<div className="flex flex-row justify-between"> <div>Unit Composition</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Unit Composition</div> <div>▲</div> </div>}
-                           triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -319,7 +358,7 @@ export default function Datasheet() {
                             trigger={<div className="flex flex-row justify-between"> <div>Keywords</div> <div>▼</div> </div>}
                             triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Keywords</div> <div>▲</div> </div>}
                             triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
-                                triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
+                            triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                             className="bg-cam-blue flex flex-col  w-full"
                             openedClassName="bg-cam-blue flex flex-col  w-full"
                             contentInnerClassName="text-left p-4 text-xs font-serif text-white"
@@ -328,16 +367,16 @@ export default function Datasheet() {
                         >
 
                             <div className="flex flex-row flex-wrap bg-gray-600 rounded-md p-1 font-sans mb-2">
-                               <div>Keywords: </div>
+                                <div>Keywords: </div>
                                 {datasheet.keywords['unit-keywords'].map(keyword =>
-                                    <div className="font-bold">{keyword+ ', '}</div>
+                                    <div className="font-bold">{keyword + ', '}</div>
                                 )}
                             </div>
 
                             <div className="flex flex-row flex-wrap bg-gray-600 rounded-md p-1 font-sans">
-                               <div>Faction Keywords: </div>
+                                <div>Faction Keywords: </div>
                                 {datasheet.keywords['faction-keywords'].map(keyword =>
-                                    <div className="font-bold">{keyword+ ', '}</div>
+                                    <div className="font-bold">{keyword + ', '}</div>
                                 )}
                             </div>
 

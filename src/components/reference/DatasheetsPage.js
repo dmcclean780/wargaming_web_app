@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import {collection} from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore"
-import { db } from "../firebase-config"
-import TitleBar from "./common/TitleBar";
-import Footer from "./common/Footer";
-import  {version} from "../version";
-import MenuButton from "./common/MenuButton";
+import { db } from "../../firebase-config"
+import TitleBar from "../common/TitleBar";
+import Footer from "../common/Footer";
+import  {version} from "../../version";
+import MenuButton from "../common/MenuButton";
 
 export default function DatasheetsPage(){
     

@@ -1,14 +1,14 @@
 import React from 'react'
-import TitleBar from './common/TitleBar.js'
-import Footer from './common/Footer.js'
-import MenuButton from './common/MenuButton.js';
-import {db} from '../firebase-config.js'
+import TitleBar from '../common/TitleBar.js'
+import Footer from '../common/Footer.js'
+import MenuButton from '../common/MenuButton.js';
+import {db} from '../../firebase-config.js'
 import {collection} from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {
     useNavigate, useLocation
   } from "react-router-dom"
-import { version } from '../version.js';
+import { version } from '../../version.js';
 
 export default function DetachmentsPage() {
 

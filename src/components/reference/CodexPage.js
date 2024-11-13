@@ -1,11 +1,11 @@
 import { Routes, useLocation, useNavigate, Route } from "react-router-dom"
 import {collection, query, where, getDocs, doc, FieldPath} from "firebase/firestore"
 import { useCollection } from "react-firebase-hooks/firestore"
-import { db } from "../firebase-config"
-import MenuButton from "./common/MenuButton"
-import TitleBar from "./common/TitleBar"
-import Footer from "./common/Footer"
-import { version } from "../version"
+import { db } from "../../firebase-config"
+import MenuButton from "../common/MenuButton"
+import TitleBar from "../common/TitleBar"
+import Footer from "../common/Footer"
+import { version } from "../../version"
 
 export default function CodexPage(){
     const navigate = useNavigate();

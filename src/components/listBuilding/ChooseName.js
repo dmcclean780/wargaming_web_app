@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import TitleBar from './common/TitleBar.js'
-import Footer from './common/Footer.js'
-import Button from './common/Button.js';
-import { version } from '../version.js';
+import TitleBar from '../common/TitleBar.js'
+import Footer from '../common/Footer.js'
+import Button from '../common/Button.js';
+import { version } from '../../version.js';
 import { useState } from 'react';
-import BasicButtons from './common/Button.js';
+import BasicButtons from '../common/Button.js';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
-import Detachment from './Detachment.js';
-import { db } from '../firebase-config.js';
+import { db } from '../../firebase-config.js';
 
 export default function ChooseName() {
 
@@ -66,7 +65,11 @@ export default function ChooseName() {
                                     name: localStorage.getItem('chosenDetachmentName')
                                 },
                                 size: parseInt(localStorage.getItem('size')),
-                                currentPoints: 0
+                                currentPoints: 0,
+                                characters: [],
+                                battleline:[],
+                                transport: [],
+                                other: [],
 
 
                             })
