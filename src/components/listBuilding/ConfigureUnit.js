@@ -134,17 +134,15 @@ export default function ConfigureUnit() {
 
                 <div className='flex flex-col items-center justify-center mt-4'>
                     {maxSize > 1 &&
-                        <div className='bg-cam-blue rounded-md w-5/6 justify-between p-2'>
-                            <div className='text-left'>Size: </div>
-                            <div><select value={size} onChange={handleSize}>
-
-                                {options.map(option =>
-                                    <option value={option}>{option}</option>
-
-
-                                )}
-
-                            </select></div>
+                        <div className='bg-cam-blue rounded-md w-5/6 justify-between p-2 flex flex-row justify-around'>
+                            <div className='text-left w-1/3 font-anton text-white'>Size: </div>
+                            
+                                <select value={size} onChange={handleSize} className='rounded-md font-anton pl-2 pr-2'>
+                                    {options.map(option =>
+                                        <option value={option}>{option}</option>
+                                    )}
+                                </select>
+                           
                         </div>
                     }
 
@@ -214,6 +212,7 @@ export default function ConfigureUnit() {
                     }
 
                 }}
+                className='bg-cam-blue px-2 py-1 rounded-lg font-anton text-white my-2 mx-4'
             />
 
             <Footer />
