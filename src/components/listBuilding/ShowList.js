@@ -1,16 +1,16 @@
 import React from 'react'
 import TitleBar from '../common/TitleBar.js'
 import Footer from '../common/Footer.js'
-import MenuButton from '../common/MenuButton.js';
 import { db } from '../../firebase-config.js'
-import { collection, doc, setDoc, where, query } from 'firebase/firestore';
+import { collection, doc, setDoc, where, query, updateDoc, arrayRemove } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {
     useNavigate, useLocation
 } from "react-router-dom"
 import { version } from '../../version.js';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import BasicButtons from '../common/Button.js';
+import UnitInList from './UnitInList.js';
 
 export default function ShowList() {
 
@@ -54,6 +54,8 @@ export default function ShowList() {
 
     localStorage.setItem('chosenFactionID', list[0].army.id)
     localStorage.setItem('chosenDetachmentID', list[0].detachment.id)
+    localStorage.setItem('warlord', list[0].warlord)
+    const docRef = doc(db, 'users', localStorage.getItem("uid"), 'lists', currentList)
 
 
     return (
@@ -74,29 +76,11 @@ export default function ShowList() {
                             className='grid place-content-center w-7 h-7 pb-3 pt-2 pl-2 pr-2 m-2 bg-transparent rounded-md border-white border text-white font-sans text-3xl'
                         />
                     </div>
-                    {list[0].characters.map(character =>
-                        <div className='bg-cam-blue text-white flex-col items-center font-anton p-1'>
-                            <div className='mt-2 rounded-md border border-gray-700 pt-2 pb-2'>
-                                <div className='w-full flex justify-center'>
-                                    <div className=' flex justify-between w-5/6'>
-                                        <div className='text-left'>{character.name}</div>
-                                        {_.isEqual(character, list[0].warlord) &&
-                                            <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>WARLORD</div>
-                                        }
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{character.cost + ' Points'}</div>
-                                    </div>
-                                </div>
-                                <div className='w-full flex justify-center'>
-                                    <ul className=' w-2/3 text-left font-sans text-sm list-disc'>
-                                        {character.wargear.map(weapon =>
-                                            <li><b>{weapon.replace('-', ' ').toUpperCase()}</b></li>
-                                        )}
-                                        <li>Enhancement:  <b>{character.enhancement.toUpperCase()}</b></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
+                    {list[0].characters.map((character) =>
+                        <UnitInList
+                            type="character"
+                            unit={character}
+                        />
                     )
 
                     }
@@ -113,26 +97,11 @@ export default function ShowList() {
                             className='grid place-content-center w-7 h-7 pb-3 pt-2 pl-2 pr-2 m-2 bg-transparent rounded-md border-white border text-white font-sans text-3xl'
                         />
                     </div>
-                    {list[0].battleline.map(character =>
-                        <div className='bg-cam-blue text-white flex-col items-center font-anton p-1'>
-                            <div className='mt-2 rounded-md border border-gray-700 pt-2 pb-2'>
-                                <div className='w-full flex justify-center'>
-                                    <div className=' flex justify-between w-5/6'>
-                                        <div className='text-left'>{character.name}</div>
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{'Size: ' + character.size}</div>
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{character.cost + ' Points'}</div>
-                                    </div>
-                                </div>
-                                <div className='w-full flex justify-center'>
-                                    <ul className=' w-2/3 text-left font-sans text-sm list-disc'>
-                                        {character.wargear.map(weapon =>
-                                            <li><b>{weapon.replace('-', ' ').toUpperCase()}</b></li>
-                                        )}
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
+                    {list[0].battleline.map(battleline =>
+                        <UnitInList
+                            type="battleline"
+                            unit={battleline}
+                        />
                     )
 
                     }
@@ -149,25 +118,11 @@ export default function ShowList() {
                             className='grid place-content-center w-7 h-7 pb-3 pt-2 pl-2 pr-2 m-2 bg-transparent rounded-md border-white border text-white font-sans text-3xl'
                         />
                     </div>
-                    {list[0].transport.map(character =>
-                        <div className='bg-cam-blue text-white flex-col items-center font-anton p-1'>
-                            <div className='mt-2 rounded-md border border-gray-700 pt-2 pb-2'>
-                                <div className='w-full flex justify-center'>
-                                    <div className=' flex justify-between w-5/6'>
-                                        <div className='text-left'>{character.name}</div>
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{character.cost + ' Points'}</div>
-                                    </div>
-                                </div>
-                                <div className='w-full flex justify-center'>
-                                    <ul className=' w-2/3 text-left font-sans text-sm list-disc'>
-                                        {character.wargear.map(weapon =>
-                                            <li><b>{weapon.replace('-', ' ').toUpperCase()}</b></li>
-                                        )}
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
+                    {list[0].transport.map(transport =>
+                        <UnitInList
+                            type="transport"
+                            unit={transport}
+                        />
                     )
 
                     }
@@ -186,25 +141,10 @@ export default function ShowList() {
                     </div>
 
                     {list[0].other.map(other =>
-                        <div className='bg-cam-blue text-white flex-col items-center font-anton p-1'>
-                            <div className='mt-2 rounded-md border border-gray-700 pt-2 pb-2'>
-                                <div className='w-full flex justify-center'>
-                                    <div className=' flex justify-between w-5/6'>
-                                        <div className='text-left'>{other.name}</div>
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{'Size: ' + other.size}</div>
-                                        <div className='bg-carmine pl-2 pr-2 p-1 rounded-md text-sm'>{other.cost + ' Points'}</div>
-                                    </div>
-                                </div>
-                                <div className='w-full flex justify-center'>
-                                    <ul className=' w-2/3 text-left font-sans text-sm list-disc'>
-                                        {other.wargear.map(weapon =>
-                                            <li><b>{weapon.replace('-', ' ').toUpperCase()}</b></li>
-                                        )}
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
+                        <UnitInList
+                            type="other"
+                            unit={other}
+                        />
                     )
 
                     }

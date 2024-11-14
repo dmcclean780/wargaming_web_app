@@ -99,7 +99,6 @@ export default function ConfigureUnit() {
         else {
             setCost(minPoints)
         }
-        console.log(cost)
     }
 
 

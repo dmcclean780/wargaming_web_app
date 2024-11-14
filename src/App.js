@@ -9,7 +9,6 @@ import {
   useNavigate,
   useLocation
 } from "react-router-dom";
-import { app } from './firebase-config.js'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -213,6 +212,18 @@ function App() {
             path='/plan/:list'
             element={
               <ShowList/>
+            }
+          />
+          <Route
+            path='/plan/:list/configure-unit'
+            element={
+              <ConfigureUnit/>
+            }
+          />
+          <Route
+            path='/plan/:list/configure-character'
+            element={
+              <ConfigureCharacter/>
             }
           />
           <Route
