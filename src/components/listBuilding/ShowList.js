@@ -3,7 +3,7 @@ import TitleBar from '../common/TitleBar.js'
 import Footer from '../common/Footer.js'
 import { db } from '../../firebase-config.js'
 import { collection, doc, setDoc, where, query, updateDoc, arrayRemove } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import {
     useNavigate, useLocation
 } from "react-router-dom"
@@ -31,18 +31,15 @@ export default function ShowList() {
         }
     });
 
-    const [data, isLoading, isError] = useCollection(
-        query(
-            collection(
-                db,
-                'users',
-                localStorage.getItem("uid"),
-                'lists'
+    const [data, isLoading, isError] = useDocument(
 
-            ),
-            where('uid', '==', currentList)
-        ) //Working Properly
-        ,
+        doc(
+            db,
+            'users',
+            localStorage.getItem("uid"),
+            'lists',
+            currentList
+        )
     )
 
     if (isLoading) {

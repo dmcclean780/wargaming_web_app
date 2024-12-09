@@ -1,7 +1,7 @@
 import TitleBar from "../common/TitleBar";
 import { useLocation } from "react-router-dom"
-import { collection, where, query } from "firebase/firestore"
-import { useCollection } from "react-firebase-hooks/firestore"
+import { collection, where, query, doc } from "firebase/firestore"
+import { useCollection, useDocument } from "react-firebase-hooks/firestore"
 import { db } from "../../firebase-config"
 import Collapsible from "react-collapsible";
 import Footer from "../common/Footer";
@@ -19,15 +19,13 @@ export default function Datasheet() {
     const currentDatasheetID = location.pathname.split('/')[4]
 
 
-    const [data, isLoading, isError] = useCollection( //Working Properly
-        query(
-            collection(
-                db,
-                'codexes',
-                currentCodexID,
-                'datasheets',
-            ),
-            where('uid', '==', currentDatasheetID)
+    const [data, isLoading, isError] = useDocument( //Working Properly
+        doc(
+            db,
+            'codexes',
+            currentCodexID,
+            'datasheets',
+            currentDatasheetID
         )
     )
 
@@ -36,9 +34,8 @@ export default function Datasheet() {
             <div>loading</div>
         )
     }
-
-    const datasheet = data.docs[0].data();
-    console.log(datasheet.keywords['unit-keywords'])
+    const datasheet = data.data();
+    
     return (
         <div>
             <div className='h-screen flex flex-col '>
@@ -234,7 +231,7 @@ export default function Datasheet() {
 
                         {datasheet['damaged']['trigger'] != -1 &&
                             <Collapsible
-                                trigger={<div className="flex flex-row justify-between"> <div>{"Damaged: 1-"+ datasheet['damaged']['trigger']+" Wounds Remaining"}</div> <div>▼</div> </div>}
+                                trigger={<div className="flex flex-row justify-between"> <div>{"Damaged: 1-" + datasheet['damaged']['trigger'] + " Wounds Remaining"}</div> <div>▼</div> </div>}
                                 triggerWhenOpen={<div className="flex flex-row justify-between"> <div>Transport</div> <div>▲</div> </div>}
                                 triggerClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"
                                 triggerOpenedClassName="text-left text-white p-2 float-left bg-carmine font-anton text-sm border-white border-y"

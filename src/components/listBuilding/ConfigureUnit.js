@@ -4,7 +4,7 @@ import Footer from '../common/Footer.js'
 import MenuButton from '../common/MenuButton.js';
 import { db } from '../../firebase-config.js'
 import { arrayUnion, collection, doc, query, updateDoc, where } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import {
     useLocation,
     useNavigate,
@@ -46,40 +46,25 @@ export default function ConfigureUnit() {
     const location = useLocation();
     const currentListID = location.pathname.split('/')[2]
 
-    const [rawDatasheet, isLoading, isError] = useCollection( //Working Properly
-        query(
-            collection(
-                db,
-                'codexes',
-                localStorage.getItem('chosenFactionID'),
-                "datasheets",
+    const [rawDatasheet, isLoading, isError] = useDocument( //Working Properly
 
+        doc(
+            db,
+            'codexes',
+            localStorage.getItem('chosenFactionID'),
+            "datasheets",
+            localStorage.getItem('chosenUnit'))
 
-            ),
-            where('uid', '==', localStorage.getItem('chosenUnit'))
-        )
     )
 
-    const [rawDetachment, loading, error] = useCollection( //Working Properly
-        query(
-            collection(
-                db,
-                'codexes',
-                localStorage.getItem('chosenFactionID'),
-                "detachments"
-            ),
-            where('uid', '==', localStorage.getItem('chosenDetachmentID'))
-        )
-    )
-
-    if (isLoading || loading) {
+    if (isLoading) {
         return (
             <div>loading</div>
         )
     }
 
 
-    const datasheet = rawDatasheet.docs[0].data()
+    const datasheet = rawDatasheet.data()
 
     const maxSize = datasheet['points']['full-squad']['models']
     const halfSize = datasheet['points']['half-squad']['models']
@@ -136,13 +121,13 @@ export default function ConfigureUnit() {
                     {maxSize > 1 &&
                         <div className='bg-cam-blue rounded-md w-5/6 justify-between p-2 flex flex-row justify-around'>
                             <div className='text-left w-1/3 font-anton text-white'>Size: </div>
-                            
-                                <select value={size} onChange={handleSize} className='rounded-md font-anton pl-2 pr-2'>
-                                    {options.map(option =>
-                                        <option value={option}>{option}</option>
-                                    )}
-                                </select>
-                           
+
+                            <select value={size} onChange={handleSize} className='rounded-md font-anton pl-2 pr-2'>
+                                {options.map(option =>
+                                    <option value={option}>{option}</option>
+                                )}
+                            </select>
+
                         </div>
                     }
 

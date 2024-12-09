@@ -4,7 +4,7 @@ import Footer from '../common/Footer.js'
 import MenuButton from '../common/MenuButton.js';
 import { db } from '../../firebase-config.js'
 import { arrayUnion, collection, doc, query, updateDoc, where } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import {
     useLocation,
     useNavigate,
@@ -60,30 +60,25 @@ export default function ConfigureCharacter() {
     const location = useLocation();
     const currentListID = location.pathname.split('/')[2]
 
-    const [rawDatasheet, isLoading, isError] = useCollection( //Working Properly
-        query(
-            collection(
-                db,
-                'codexes',
-                localStorage.getItem('chosenFactionID'),
-                "datasheets",
+    const [rawDatasheet, isLoading, isError] = useDocument( //Working Properly
 
+        doc(
+            db,
+            'codexes',
+            localStorage.getItem('chosenFactionID'),
+            "datasheets",
+            localStorage.getItem('chosenCharacter'))
 
-            ),
-            where('uid', '==', localStorage.getItem('chosenCharacter'))
-        )
     )
 
-    const [rawDetachment, loading, error] = useCollection( //Working Properly
-        query(
-            collection(
-                db,
-                'codexes',
-                localStorage.getItem('chosenFactionID'),
-                "detachments"
-            ),
-            where('uid', '==', localStorage.getItem('chosenDetachmentID'))
-        )
+    const [rawDetachment, loading, error] = useDocument( //Working Properly
+
+        doc(
+            db,
+            'codexes',
+            localStorage.getItem('chosenFactionID'),
+            "detachments",
+            localStorage.getItem('chosenDetachmentID'))
     )
 
     if (isLoading || loading) {
@@ -93,8 +88,8 @@ export default function ConfigureCharacter() {
     }
 
 
-    const datasheet = rawDatasheet.docs[0].data()
-    const detachment = rawDetachment.docs[0].data()
+    const datasheet = rawDatasheet.data()
+    const detachment = rawDetachment.data()
     const rangedWeapons = datasheet['ranged-weapons']
     const meleeWeapons = datasheet['melee-weapons']
 
